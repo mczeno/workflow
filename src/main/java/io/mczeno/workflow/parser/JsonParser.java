@@ -1,4 +1,4 @@
-package io.mczeno.workflow.parse;
+package io.mczeno.workflow.parser;
 
 /**
  * JsonParser
