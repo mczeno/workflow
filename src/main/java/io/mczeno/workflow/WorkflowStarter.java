@@ -15,7 +15,7 @@ public class WorkflowStarter {
     public static void main(String[] args) {
         log.info("Workflow start...");
 
-        // TODO: 2019-12-06
+
 
 
         log.info("Workflow end.");

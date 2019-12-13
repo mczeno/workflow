@@ -11,8 +11,9 @@ public class Task {
 
     private String id;
     private String name;
-    private TaskCategoryEnum category;
     private Integer cycles = 1;
+    private TaskCategoryEnum category;
+    private Object content;
 
 
 
