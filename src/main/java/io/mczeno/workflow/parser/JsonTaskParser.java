@@ -1,10 +1,12 @@
 package io.mczeno.workflow.parser;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.mczeno.workflow.Task;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * JsonTaskParser
@@ -20,8 +22,8 @@ public class JsonTaskParser implements TaskParser {
     }
 
     @Override
-    public Task[] parseTasks(File file) throws IOException {
-        return objectMapper.readValue(file, Task[].class);
+    public List<Task> parseTasks(File file) throws IOException {
+        return objectMapper.readValue(file, new TypeReference<List<Task>>() {});
     }
 
 }

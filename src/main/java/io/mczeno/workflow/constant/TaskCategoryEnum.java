@@ -7,6 +7,8 @@ package io.mczeno.workflow.constant;
  */
 public enum TaskCategoryEnum {
 
-    HTTP_REQUEST;
+    HTTP_REQUEST,
+
+    ;
 
 }
