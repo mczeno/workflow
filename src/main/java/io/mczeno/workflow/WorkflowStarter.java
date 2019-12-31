@@ -12,7 +12,8 @@ public class WorkflowStarter {
 
     private static final Logger log = LoggerFactory.getLogger(WorkflowStarter.class);
 
-    public static void main(String[] args) throws Exception {
+
+    public static void main(String[] args) {
         log.info("Workflow start...");
 
         String pathname = null;

@@ -1,12 +1,15 @@
 package io.mczeno.workflow;
 
-import io.mczeno.workflow.parser.JsonTaskParser;
 import io.mczeno.workflow.parser.TaskParser;
+import io.mczeno.workflow.parser.TaskParserFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.List;
+
+import static io.mczeno.workflow.constant.GlobalConstants.DEFAULT_JSON_TASK_FILE_NAME;
+import static io.mczeno.workflow.constant.GlobalConstants.FILE_SEPARATOR_REGEX;
 
 /**
  * TaskExecutorService
@@ -17,24 +20,18 @@ public class TaskExecutorService {
 
     private static final Logger log = LoggerFactory.getLogger(WorkflowStarter.class);
 
-    private static final String TASK_FILE_NAME = "workflow_task";
-    private static final String TASK_FILE_TYPE_JSON = "json";
-    private static final String FILE_SEPARATOR = "\\.";
-
-    private static final String DEFAULT_JSON_TASK_FILE_NAME = String.join(FILE_SEPARATOR, TASK_FILE_NAME, TASK_FILE_TYPE_JSON);
-
-
     /**
      * 任务执行入口
      *
      * @param pathname 任务文件路径
      */
-    public void executeTasks(String pathname) throws Exception {
-
+    public void executeTasks(String pathname) {
         File file = new File(getPathname(pathname));
 
         // 获取任务解析器
-        TaskParser taskParser = getTaskParser(file.getName());
+        String[] fileNameParts = file.getName().split(FILE_SEPARATOR_REGEX);
+        String fileType = fileNameParts[fileNameParts.length - 1];
+        TaskParser taskParser = new TaskParserFactory().getTaskParser(fileType);
 
         List<Task> tasks;
         try {
@@ -56,28 +53,6 @@ public class TaskExecutorService {
      */
     private String getPathname(String pathname) {
         return (pathname == null || pathname.isEmpty()) ? DEFAULT_JSON_TASK_FILE_NAME : pathname;
-    }
-
-    /**
-     * 通过解析文件名获取对应的任务解析器
-     *
-     * @param fileName 文件名
-     * @return 任务解析器
-     * @see TaskParser
-     */
-    private TaskParser getTaskParser(String fileName) throws Exception {
-        String[] fileNameParts = fileName.split(FILE_SEPARATOR);
-        String fileType = fileNameParts[fileNameParts.length - 1];
-
-        switch (fileType) {
-            case TASK_FILE_TYPE_JSON: {
-                return new JsonTaskParser();
-            }
-
-            default:
-                throw new Exception("暂时不支持此类型的文件：" + fileType);
-        }
-
     }
 
 }
