@@ -14,12 +14,12 @@ public class TaskParserFactory {
     /**
      * 通过输入的文件类型判断并获取任务解析器
      */
-    public TaskParser getTaskParser(String fileType) {
+    public TaskParser getTaskParser(String taskSourceType) {
         TaskConfigurationTypeEnum taskConfigTypeEnum;
         try {
-            taskConfigTypeEnum = TaskConfigurationTypeEnum.valueOf(fileType.toUpperCase());
+            taskConfigTypeEnum = TaskConfigurationTypeEnum.valueOf(taskSourceType.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException("暂时不支持此类型的任务文件：" + fileType);
+            throw new RuntimeException("暂时不支持此类型的任务文件：" + taskSourceType);
         }
 
         try {

@@ -1,0 +1,12 @@
+[
+    {
+        "category": "HTTP_REQUEST",
+        "content": {
+            "url": "http://localhost:8080/hello",
+            "requestMethod": "GET",
+            "requestParam": "",
+            "requestBody": ""
+        }
+    }
+
+]
